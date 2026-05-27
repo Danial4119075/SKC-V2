@@ -86,7 +86,10 @@ def task_b(graph: Graph,
             # Probability vertex i was still healthy entering day t
             escape = 1.0 - prev[i]
 
-            # TODO: multiply in the per-neighbour failure probabilities
+            # Multiply in the probability that each infected neighbour
+            # fails to transmit on day t
+            for neighbour, weight in graph.get_neighbours(vertex):
+                escape *= 1.0 - prev[neighbour.index] * weight
 
             curr[i] = 1.0 - escape
 

@@ -91,7 +91,26 @@ def task_d(eligible: list[Person],
     best_benefit, best_doses = solve(n, C)
 
     # --------------------------------------------------
-    # Backtracking comes in a later commit
+    # Backtrack: replay the same skip-vs-take comparison
+    # used in solve() to recover which persons were picked.
+    # Using solve() (not raw memo lookups) means c == 0 and
+    # i == 0 base cases are handled uniformly.
+    # --------------------------------------------------
     best_subset: list[Person] = []
+    c = C
+    for i in range(n, 0, -1):
+        person = eligible[i - 1]
+        cost = person.dosage_requirement
+        skip_b, skip_d = solve(i - 1, c)
+        if cost <= c:
+            sub_b, sub_d = solve(i - 1, c - cost)
+            take_b = sub_b + person.benefit
+            take_d = sub_d + cost
+            took = (take_b > skip_b + EPS) or (
+                abs(take_b - skip_b) < EPS and take_d < skip_d
+            )
+            if took:
+                best_subset.append(person)
+                c -= cost
 
     return best_subset, best_benefit, best_doses, memo

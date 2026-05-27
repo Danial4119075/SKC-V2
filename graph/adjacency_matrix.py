@@ -74,8 +74,14 @@ class AdjacencyMatrix(Graph):
         @param weight: The weight of the edge (e.g. transmission probability).
         @returns: True if the edge was added successfully, False otherwise.
         """
-        # TODO: implement this method
-        return False
+        if u.index >= len(self._vertices) or v.index >= len(self._vertices):
+            return False
+
+        self._matrix[u.index][v.index] = weight
+        self._matrix[v.index][u.index] = weight
+
+        self._num_edges += 1
+        return True
 
     def get_vertices(self) -> list[Vertex]:
         """

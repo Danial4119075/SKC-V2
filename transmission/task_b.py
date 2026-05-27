@@ -93,4 +93,10 @@ def task_b(graph: Graph,
 
             curr[i] = 1.0 - escape
 
+        # Patient zero is infected with certainty for all t.
+        # The recurrence already preserves this (escape factor is 0
+        # when prev[source] == 1.0), but enforce it defensively to
+        # match the Monte Carlo baseline and guard against drift.
+        curr[source.index] = 1.0
+
     return table

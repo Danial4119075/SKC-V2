@@ -101,8 +101,13 @@ class AdjacencyMatrix(Graph):
 
         @returns: A list of all Edge objects in the graph.
         """
-        # TODO: implement this method
-        return []
+        edges = []
+        n = len(self._vertices)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if self._matrix[i][j] > 0.0:
+                    edges.append(Edge(self._vertices[i], self._vertices[j], self._matrix[i][j]))
+        return edges
 
     def get_neighbours(self, vertex: Vertex) -> list[tuple[Vertex, float]]:
         """

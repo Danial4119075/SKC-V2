@@ -123,8 +123,15 @@ class AdjacencyMatrix(Graph):
         @param vertex: The vertex whose neighbours are to be returned.
         @returns: A list of (neighbour, weight) tuples, one per neighbouring vertex.
         """
-        # TODO: implement this method
-        return []
+        if vertex.index >= len(self._vertices):
+            return []
+
+        neighbours = []
+        row = self._matrix[vertex.index]
+        for j in range(len(self._vertices)):
+            if row[j] > 0.0:
+                neighbours.append((self._vertices[j], row[j]))
+        return neighbours
 
     def has_edge(self, u: Vertex, v: Vertex) -> bool:
         """

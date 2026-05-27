@@ -283,6 +283,10 @@ The following is an example visualisation produced by the simulation with 12 res
 
 ---
 
+> **Note on commit history:** Incremental development of this project was tracked in a separate working repository. This repository contains the final, consolidated version of the submission with clear, meaningful commit messages at each stage, so the submission stays clean and easy to navigate for marking.
+
+---
+
 ## Academic Integrity
 
 This is an individual assignment. Do not share your code or copy from others.

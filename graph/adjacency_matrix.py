@@ -157,8 +157,9 @@ class AdjacencyMatrix(Graph):
         @param v: The second vertex.
         @returns: The edge weight as a float, or 0.0 if no edge exists.
         """
-        # TODO: implement this method
-        return 0.0
+        if u.index >= len(self._vertices) or v.index >= len(self._vertices):
+            return 0.0
+        return self._matrix[u.index][v.index]
 
     def num_vertices(self) -> int:
         """

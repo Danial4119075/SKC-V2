@@ -80,8 +80,9 @@ def task_d(eligible: list[Person],
             take_b = sub_b + person.benefit
             take_d = sub_d + cost
             # Lexicographic: maximise benefit, then minimise doses
-            # Tiebreak comes in the next commit; for now, pure benefit max
-            if take_b > skip_b:
+            if take_b > skip_b + EPS:
+                best = (take_b, take_d)
+            elif abs(take_b - skip_b) < EPS and take_d < skip_d:
                 best = (take_b, take_d)
 
         memo[i][c] = best
